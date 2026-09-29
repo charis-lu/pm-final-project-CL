@@ -6,7 +6,7 @@
 - **What I demoted from Must → Should/Won’t, and why:** A fallback if the curated feed fails to load - homepage must degrade gracefully, not break, given the team's size and timeline. This does not really help the issue of Priya having to scroll and search meaninglessly for 20+ minutes
 
 ## Generate your Simplified PRD
-- **One thing my PRD makes explicit that a vague brief would have missed:** My PRD makes explicit that A1 is testing whether a small, trusted human-curated set can interrupt Priya’s 20-minute dead scroll - not building another recommendation engine.
+- **One thing my PRD makes explicit that a vague brief would have missed:** My PRD makes explicit that A1 is testing whether a small, trusted human-curated set can interrupt Priya’s 20-minute dead scroll - not building another recommendation engine. https://claude.ai/artifact/CNkMLUQNgACA3debVkGHsv
 
 ## Prompt-to-prototype sprint
 - **Where did the prototype reveal a gap in my PRD logic? (what I had to update):** There was a gap between the “curated rail” hypothesis and the measurement design. My PRD says the rail should give Priya “a small set she can trust,” it never specifies what makes those 5–8 titles good enough to earn that trust.
