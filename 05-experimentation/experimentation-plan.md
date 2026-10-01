@@ -1,25 +1,44 @@
-# Experimentation Plan
+# Experimentation Plan (Module 5)
 
-> **Module 5 · ★ Deliverable 5.** Repo file `05-experimentation/experimentation-plan.md` — part of your submission.
-> Do the lab in the **Module 5 · Exercise Guide** (linked from the Module 5 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It becomes the **Experimentation Plan** slide of your Module 6 final deck.
+## Get your documents ready
+- **From M3, your hypothesis sentence:** Based on 8 of 12 research sessions showing extended browsing without playback and the 41% → 34% decline in search-to-play, I believe that reducing discovery friction for Priya, the plateauing loyalist / Power User, will increase confident content starts and meaningful engagement, as measured by a ≥5 percentage-point increase in search-to-play conversion, from 34% to at least 39%. I will protect the 30+ minute session rate (11%) and make a go/no-go decision after 8–12 weeks of sufficient Spotlight exposure.
+- **From M3, your primary success metric & guardrail metric:** Primary Success Metric - Search-to-play conversion rate (the percentage of content searches that result in a play start) because t directly measures whether Spotlight is closing the discovery gap of turning “I’m looking for something to watch” into “I found something and started watching.” The current baseline is 34%, down from 41% six months ago, so will need to increase the share of discovery attempts that convert into viewing, rather than prolonged browsing with no play.
 
-## Overview
+Guardrail - 30+ minute session rate (the percentage of sessions reaching at least 30 minutes) because Spotlight should improve discovery without reducing meaningful engagement among StreamLine’s existing viewers. The current baseline is 11%, down from 19% six months ago, so the 30+ minute session rate must not decline further as Spotlight adoption grows.
+- **From M4, the feature you scoped in your PRD this is what you're testing:** A1 · Spotlight Curated Rail Directly interrupts Priya's 20-minute dead scroll by replacing algorithmic rows with a small trusted set — the core mechanic search-to-play needs to recover from 34%.
 
-_A high-level validation strategy to test your hypothesis before full-scale development._
+## Define your experiment parameters
+- **Feature under test pull from your M4 PRD:** A1 · Spotlight Curated Rail Directly interrupts Priya's 20-minute dead scroll by replacing algorithmic rows with a small trusted set — the core mechanic search-to-play needs to recover from 34%.
+- **Persona pull your M2 persona:** Priya (UXR-01), the plateauing loyalist. A 14-year heavy viewer whose long tenure makes her the retention base the hook is most worried about protecting.
+- **Expected outcome the behaviour change you expect, from your M3 hypothesis:** I believe that reducing discovery friction for Priya, the plateauing loyalist / Power User, will increase confident content starts and meaningful engagement, as measured by a ≥5 percentage-point increase in search-to-play conversion, from 34% to at least 39%. I will protect the 30+ minute session rate (11%) and make a go/no-go decision after 8–12 weeks of sufficient Spotlight exposure.
+- **Primary success metric the one number that defines success, from M3:** Discovery-to-play conversion rate (the percentage of discovery sessions that result in a play start) because it directly measures whether Spotlight is closing the discovery gap of turning “I’m looking for something to watch” into “I found something and started watching.” The current baseline is 34%, down from 41% six months ago, so will need to increase the share of discovery attempts that convert into viewing, rather than prolonged browsing with no play.
+- **Baseline rate today's rate of your primary metric, from your M3 data:** The current baseline is 34%
+- **Guardrail metric & boundary what must not break, and how far it can move before you investigate:** 30+ minute session rate (the percentage of sessions reaching at least 30 minutes) because Spotlight should improve discovery without reducing meaningful engagement among StreamLine’s existing viewers. The current baseline is 11%, down from 19% six months ago, so the 30+ minute session rate must not decline further as Spotlight adoption grows.
+- **Minimum Detectable Effect (MDE) the smallest improvement worth shipping, your floor:** +5 pts
+- **Sample size per arm use the calculator in the builder, baseline + MDE:** 1455
+- **Traffic split & test duration 50/50 standard · cover ≥ 2 weekly cycles:** 50/50 standard.  10 weeks
+- **Significance threshold p < 0.05 is standard, explain any deviation:** p < 0.05 industry standard, no deviation
 
-_____
+## Define your control and variant
+- **Control (A) the current experience, reference your M2 moment of misery and M3 funnel/workflow data:** The existing StreamLine home experience with no Spotlight Curated Rail. Users see the current algorithmic rows and can browse/search the existing 15,000+ title library exactly as they do today. No new curated surface is added. 
+Per the M2 moment of misery, Priya opens StreamLine, scrolls for roughly 20 minutes, finds nothing worth watching, closes the app, and returns to a DVD. 8 of 12 sessions showed extended browsing without playback.
+Per the M3 funnel, only 34% of content searches result in a play start, down from 41% six months ago. Only 11% of sessions reach 30+ minutes, down from 19%.
+- **Variant (B) your single change, copy the relevant screens & functional requirements from your M4 PRD:** Add a Spotlight Curated Rail that puts a small, hand-picked set of titles at the top of Priya's home screen, chosen by a person rather than generated by a model. 
+Relevant Screens
+1. Entry Point — Home Screen. Existing algorithmic rows (unchanged). Spotlight rail, distinct visual treatment, positioned above the fold. Rail label ("Spotlight — Curated by StreamLine"). 5–8 title cards: poster art + title text. Loading/skeleton state for the rail only
+2. Feature Core — Rail Card / Detail. Poster art, title, curated badge. One-line human-written rationale (should-have). Primary "Play" affordance. Secondary "More info" affordance (non-blocking)
+3. Success / Confirmation — Play Start. Playback view initiating from a rail-originated tap. Silent source tag (Spotlight-origin) for instrumentation — not user-visible. Failure state: if playback errors, return to home with the rail intact, not a dead end
+Functional Requirements
+1. Curated, not generated. The rail displays 5–8 titles sourced from a human-curated feed (JSON or spreadsheet-fed); no algorithmic or ML selection logic is involved.
+2. Above the fold. The rail renders within the top three rows of the home screen on primary target devices.
+3. Minimum-step play path. A tap on a rail card reaches play in ≤2 taps, measured explicitly against the search-to-play metric.
+4. Isolated instrumentation. Rail impressions, clicks, and play starts are logged as events distinct from algorithmic-row analytics, so the rail's contribution to the 34% baseline can be measured on its own.
+5. Graceful degradation. If the curated feed fails to load or returns zero items, the rail does not render and the home screen behaves as it does today — no broken UI state.
+6. Defined refresh cadence. Curated titles are updated on a weekly cycle via the manual curation input.
+7. No auth-gating. The rail is visible to all viewers in the prototype; no login state or personalization logic determines its contents.
+- **Isolation check, what has NOT changed? list everything identical between arms (app version, recommendation engine, notifications, onboarding). If something changed inadvertently, your test is compromised.:** App version, Home-screen structure, Recommendation engine, Algorithmic rows, Search experience, Content catalogue, Title availability, Playback experience, Pricing/subscription, Notifications, Email communications, Onboarding, Account/authentication, Personalization, Watch history, Watchlist, Continue Watching, Device/platform, Experiments/feature flags, Content-ranking rules, Tracking/analytics, and Performance/load behavior are all identical between arms.
 
-## What you're testing
-
-| Element | Detail |
-|---|---|
-| Hypothesis under test | _____ |
-| Experiment design (A/B, etc.) | _____ |
-| Primary metric | _____ |
-| Guardrail metric | _____ |
-| Decision rule (ship / kill / pivot) | _____ |
-
-## Findings & decision _(after running it)_
-
-_____
+## Formalize your hypothesis & shipping criteria
+- **Your hypothesis (filled in):** I believe that a Spotlight Curated Rail for the Power User will result in an increase confident content starts and meaningful engagement, as measured by a +5 pts change in discovery-to-play conversion rate (the percentage of discovery sessions that result in a play start) within 10 weeks. We will protect 30+ minute session rate (the percentage of sessions reaching at least 30 minutes) because Spotlight should improve discovery without reducing meaningful engagement among StreamLine’s existing viewers. The 30+ minute session rate must not decline further as Spotlight adoption grows throughout the test.
+- **Your shipping criteria (filled in):** We will SHIP if Discovery-to-play conversion rate (the percentage of discovery sessions that result in a play start) because it directly measures whether Spotlight is closing the discovery gap of turning “I’m looking for something to watch” into “I found something and started watching.” The current baseline is 34%, down from 41% six months ago, so will need to increase the share of discovery attempts that convert into viewing, rather than prolonged browsing with no play. improves by ≥ +5 pts at p < 0.05 and 30+ minute session rate (the percentage of sessions reaching at least 30 minutes) because Spotlight should improve discovery without reducing meaningful engagement among StreamLine’s existing viewers. The current baseline is 11%, down from 19% six months ago, so the 30+ minute session rate must not decline further as Spotlight adoption grows. does not reach The 30+ minute session rate must not decline further after Week 10. We will ITERATE if direction is positive but lift is below MDE. We will KILL if the primary metric shows no improvement or moves negatively. The read date is fixed at the end of Week 10, no results reviewed before then.
+- **Hardest parameter to define, and did it change your hypothesis? quick debrief:** Hardest parameter to define was the denominator of the primary metric of a discovery attempt. Yes it did change my hypothesis. Across the first review, my working assessment was "this is a solid experiment with two loose ends" (a timeline contradiction and a vague guardrail) - the kind of thing you'd fix in an afternoon before launch. Once I looked at "content searches" as the literal denominator, my hypothesis shifted to something much more serious: this experiment could return a false negative regardless of whether the feature actually works, because a passive-browse rail might generate almost no "search" events under a narrow definition, capping the measured effect near zero no matter what happens on-screen. That's not a polish issue - that's a "you could kill a working feature because you measured the wrong funnel" issue, and it's a different category of risk than anything else flagged in the brief.
