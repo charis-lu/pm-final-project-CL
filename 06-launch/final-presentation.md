@@ -16,6 +16,7 @@ Your final project is a single presentation, a self-contained HTML deck built fr
 2. Confirm your repo URL, copy the master prompt the generator builds, and run it in **Claude**, **ChatGPT**, or **Gemini** to produce a single-file HTML deck. _(Prefer slides? Paste the same content into Gamma or Canva instead.)_
 3. Save the result as `06-launch/final-presentation.html`, commit it, and enable **GitHub Pages** (Settings → Pages) so your deck has a shareable link.
 4. Review, then submit your **repo link** and your **presentation deck** to the learning platform within **7 days** of your cohort ending.
+5. https://claude.ai/artifact/6tXVxiJZzUniVWQPSMvDpS
 
 ## The final showcase _(optional)_
 
