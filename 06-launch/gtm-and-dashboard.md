@@ -1,18 +1,43 @@
-# GTM Strategy & Success Dashboard
+# GTM Strategy & Success Dashboard (Module 6)
 
-> **Module 6 · ★ Deliverable 6.** Repo file `06-launch/gtm-and-dashboard.md` — part of your submission.
-> Do the lab in the **Module 6 · Exercise Guide** (linked from the Module 6 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It becomes the **GTM Strategy & Success Dashboard** slide of your Module 6 final deck.
+## Get your prior work ready
+- **The feature you're launching from your M4 PRD, one feature, not a list:** A1 · Spotlight Curated Rail Directly interrupts Priya's 20-minute dead scroll by replacing algorithmic rows with a small trusted set — the core mechanic search-to-play needs to recover from 34%.
+- **What your M5 experiment told you shipped / iterating, the evidence behind the launch:** We will SHIP if Discovery-to-play conversion rate (the percentage of discovery sessions that result in a play start) because it directly measures whether Spotlight is closing the discovery gap of turning “I’m looking for something to watch” into “I found something and started watching.” The current baseline is 34%, down from 41% six months ago, so will need to increase the share of discovery attempts that convert into viewing, rather than prolonged browsing with no play. improves by ≥ +5 pts at p < 0.05 and 30+ minute session rate (the percentage of sessions reaching at least 30 minutes) because Spotlight should improve discovery without reducing meaningful engagement among StreamLine’s existing viewers. The current baseline is 11%, down from 19% six months ago, so the 30+ minute session rate must not decline further as Spotlight adoption grows. does not reach The 30+ minute session rate must not decline further after Week 10. We will ITERATE if direction is positive but lift is below MDE. We will KILL if the primary metric shows no improvement or moves negatively. The read date is fixed at the end of Week 10, no results reviewed before then.
+- **Your persona pull your M2 persona, this anchors your audience:** Priya (UXR-01), the plateauing loyalist. A 14-year heavy viewer whose long tenure makes her the retention base the hook is most worried about protecting.
 
-## Go-to-market summary
+## Set your goal, then your audience
+- **Primary GTM goal awareness · engagement · conversion, pick one:** Conversion
+- **Why this goal? what makes this the right goal for this feature right now:** The primary metric is literally a conversion rate - " discovery-to-play", the share of browsing sessions that end in a play start — and that's the number the go/no-go decision hinges on at Week 10.
+- **Target audience the specific segment your goal implies, be precise:** Subscribers with meaningful tenure, above-average session frequency, and a behavioral signature of extended browsing with low or declining play-starts. From M2 (Priya (UXR-01), the plateauing loyalist. A 14-year heavy viewer whose long tenure makes her the retention base the hook is most worried about protecting.)
 
-_A concise overview of your launch plan: channels, launch size, and overall strategy._
+## Size your launch
+- **Launch tier S (minimal) · M (targeted) · L (multi-channel) · XL (full GTM):** S (minimal - no outreach)
+- **Justification reach + revenue impact + what silence would risk:** Reach is limited to a behaviorally-scoped subset of existing subscribers (no new or lapsed users), revenue impact is retention-protective rather than revenue-generating and shows up over months not at launch, and silence carries minimal risk because the feature is self-announcing - it appears above the fold the moment a user opens the app, requiring no external comms to be noticed.
+- **Is this a launch or a release? does it need go-to-market, or can it just ship?:** It is more of a release because it is a change to the product that the product itself communicates by existing.
 
-_____
+## Choose your top three channels and plan assets
+- **Channel 1 owned / earned / paid, and why it reaches your audience:** Owned (In-product) The rail itself is the channel - it reaches the exact segment, at the exact moment they're experiencing the moment of misery (mid-scroll, mid-session), with zero acquisition cost. This is the whole channel strategy.
+- **Channel 2 owned / earned / paid, and why:** Earned (press, social buzz, work of mouth) - No, Earned channels work when there's a story worth other people telling - a new product, a pricing move, something with external stakes. A home-screen row for existing subscribers isn't a pitch-worthy story, and trying to manufacture one would overstate a retention tweak as news. This is consistent with the S-tier.
+- **Channel 3 owned / earned / paid, and why:** Paid (ads, promoted placement) - No, Paid exists to reach people who aren't already there. Everyone in scope is already a subscriber, already opening the app. Paid spend here would be reaching an audience that doesn't need reaching. This is consistent with the S-tier.
+- **Enablement & assets what Sales / CS / Support need, plus the assets to build (one-pager, demo, etc.):** One-page internal brief: what the rail is, why it exists, what it isn't (not personalized, not AI-matched, not replacing search). Short FAQ: "Why do I see different titles than my friend?" / "Can I turn it off?" / "Why isn't it personalized to me?". One-slide status: hypothesis, Week 10 decision date, ship/kill criteria (the exact rule from the A/B review). Metric definitions doc: discovery-to-play (rail-isolated vs. algorithmic), guardrail definition, Week 10 as the single pre-registered analysis point. The weekly refresh process doc - who picks titles, cadence, what "human-curated" means operationally
 
-## Success dashboard
+## Make it executable
+- **Ownership named owner per key activity, individual, not department:** PM - Curated title selection + weekly refresh , metric definitions doc (authored) · Support/CS brief + FAQ (authored) , ship/hold/kill decision, retro + write-up
+Engineer - Rail build,  isolated instrumentation, Smart Behaviors QA , feature flag go-live + monitoring, full rollout if shipped
+Designer - Rail visual treatment, curated badge, skeleton/loading state
+Data/Analytics - Metric definitions doc (reviewed) , data pipeline validation pre-Day 1, Week 10 significance + guardrail pull
+Customer Support Lead - Support/CS brief + FAQ (received and owned on the ground)
+- **Budget & resource gaps what costs extra, and any asset you can't currently build:** Budget required for Data/Analytics and Customer Support Lead. 
+Data/Analytics - The entire Week 10 decision depends on this role -validating the discovery-session event definition actually fires correctly, confirming whether the 1,455/arm is independent or clustered by user, and running the significance + guardrail pull. Right now that work has nowhere to land except "PM does it," and PM doing inferential statistics on a go/no-go call that determines whether the feature ships is a real risk, not a shortcut.
+Customer Support Lead - Someone needs to receive the FAQ, actually answer "what's this new row" tickets, and feed confusion patterns back -"delivered to Support" isn't accountability without a name on the receiving end.
+PM escalates the Data/Analytics and CS Lead staffing gap to [manager/stakeholder] by end of Week 1. If unresolved by start of Phase 2 (Week 4), PM formally assumes both roles as an explicit, named risk - not a silent default.
+- **Timeline Phase 1 beta → Phase 2 launch moment → Phase 3 post-launch:** Phase 1 Beta: Weeks 1–3 (the sprint) - Build rail + home integration, isolated instrumentation, visual treatment/skeleton state, Smart Behaviors QA, first curated feed live, Support/CS brief + FAQ drafted, metric definitions doc drafted and reviewed, and data pipeline validated before go-live
+Phase 2 Launch moment: Week 4 (50/50 split goes live) through Week 10 - Feature flag on, production monitoring, weekly curated-title refresh begins and continues, support/CS brief delivered to a named receiving owner, no interim ship/kill calls - single pre-registered look at Week 10, not a rolling window
+Phase 3 Post-launch: Week 10 onward - Pull significance + guardrail results at Week 10 (the one analysis point, not a range), PM makes the ship/hold/kill call against the pre-written rule, if shipped: full rollout to eligible segment, retro + findings write-up, decide permanent ownership of curation and Data/Analytics role (the gaps flagged earlier can't stay unresolved past this point)
 
-| KPI | Baseline | Target | Measurement window |
-|---|---|---|---|
-| _____ | _____ | _____ | _____ |
-| _____ | _____ | _____ | _____ |
+## Define how you'll know it worked
+- **Success metrics 2 to 3 metrics that match your GTM goal:** Discovery-to-play conversion rate (rail-isolated): 34% → ≥39%, evaluated at Week 10.
+30+ minute session rate, held ≥ non-inferiority margin of 11%.
+Rail-attributed play-start share of total plays (what fraction of all plays in the variant arm originated from the rail, not just the lift in the rate).
+- **Bad signal to watch for e.g. high reach, zero signups = message-market mismatch:** Rail impressions climb but rail-attributed play starts stay flat. This is high reach, zero conversion. If Priya(persona) and her cohort are seeing the rail (impressions up) but not tapping into a play from it, that's not a traffic problem, it's a curation-market mismatch. The picks themselves aren't landing, the same failure mode as an ad campaign with the wrong message. The fix isn't more visibility, it's different titles.
+- **Most likely post-launch decision double-down · iterate · pivot · deprioritize, and what would trigger it:** Iterate - this is a Minimal/S-tier, single-mechanic V1 with a lot of things deliberately left out by design like no mood filtering, no personalization, no placement A/B, no multiple rails. Realistically the conversion moves in the right direction, guardrail holds, and the next-level questions become things like rail placement, refresh cadence, or whether a second curated surface helps, which is exactly the Could Have and Should Have items already parked in the MoSCoW list for V2. That's iteration by definition: keep the mechanic, refine the execution, using data this experiment wasn't even designed to answer (it was scoped to test one placement, one feed size, one cadence).
